@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Agrican - Sacha Ucendo</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // 1. Création dynamique de la structure de la modale
+    const modalHtml = `
+        <div id="imgModal" class="modal" style="display:none;">
+            <span class="close-modal">&times;</span>
+            <img class="modal-content" id="fullImg">
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+    const modal = document.getElementById("imgModal");
+    const modalImg = document.getElementById("fullImg");
+    const closeBtn = document.querySelector(".close-modal");
+
+    // 2. Gestion du clic sur les images de tes wrappers
+    document.querySelectorAll('.img-wrapper img').forEach(img => {
+        img.addEventListener('click', function() {
+            modal.style.display = "flex";
+            modalImg.src = this.src;
+            document.body.style.overflow = "hidden"; // Empêche le scroll en arrière-plan
+        });
+    });
+
+    // 3. Fonctions de fermeture
+    const closeModal = () => {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+    };
+
+    closeBtn.onclick = closeModal;
+    modal.onclick = (e) => { if(e.target === modal) closeModal(); }; // Ferme si on clique à côté
+
+    // Fermeture avec la touche Echap
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape" && modal.style.display === "flex") closeModal();
+    });
+    });
+</script>
+
+<body>
+
+    <header class="main-header">
+        <nav>
+            <div class="logo-area">
+                <a href="URL_DE_TON_LINKEDIN" target="_blank" class="linkedin-link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html#home">Accueil</a>
+                <a href="../index.html#about">À propos</a>
+                <a href="../index.html#competences">Compétences</a>
+                <a href="../index.html#logiciels">Outils</a>
+                <a href="../index.html#projects">Projets</a>
+                <a href="../index.html#experience">Expériences</a>
+                <a href="../contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <header class="project-header">
+        <div class="fade-in-up">
+            <h1>SAÉ 4.02 : Reporting d'une analyse multivariée</h1>
+            <p>Clustering des pratiques agricoles - Cohorte Agrican</p>
+        </div>
+    </header>
+    
+    <div class="project-page-container">
+        <section class="section">
+            <h2>À propos</h2>
+            <p>Ce projet, réalisé dans le cadre du BUT Science des Données, porte sur l'analyse de la cohorte <strong>Agrican</strong> (Agriculture et Cancer). L'enjeu était de segmenter une population de 12 310 agriculteurs en profils homogènes selon leurs activités professionnelles passées afin de faciliter de futures études épidémiologiques.</p>
+        </section>
+
+        <section class="section">
+            <h2>Organisation du travail</h2>
+            <p>Le projet a été mené en équipe de trois personnes (Louis Milon, Mandir Diop et moi-même). Nous avons dû manipuler des matrices complexes de ratios de pratique (activités professionnelles et tâches agricoles) et assurer une cohérence scientifique entre l'analyse statistique et l'interprétation métier.</p>
+        </section>
+
+        <section class="section">
+            <h2>Démarche et résultats</h2>
+            <p>Nous avons mis en œuvre une méthodologie d'analyse multivariée rigoureuse :</p>
+            <ul>
+                <li><strong>Préparation :</strong> Calcul des matrices de ratios de pratique pour chaque individu sur la période étudiée (1950-1970).</li>
+                <li><strong>Réduction de dimension :</strong> Réalisation d'une <strong>ACP</strong> (Analyse en Composantes Principales) permettant de synthétiser 76% de l'information initiale sur 7 axes factoriels.</li>
+                <li><strong>Segmentation :</strong> Application de la méthode des <strong>k-means</strong> pour regrouper les agriculteurs.</li>
+                <li><strong>Validation :</strong> Utilisation de la courbe de l'inertie interclasse (méthode du coude) pour valider la pertinence d'une segmentation en 5 clusters.</li>
+            </ul>
+            
+            <p>Résultats de la segmentation :</p>
+            <ul>
+                <li>Le <strong>Cluster 2</strong> est fortement marqué par l'élevage bovin (94% de ratio de pratique).</li>
+                <li>Le <strong>Cluster 5</strong> regroupe quasi exclusivement des profils viticoles (97%).</li>
+                <li>L'analyse a révélé que les profils du Cluster 5 présentent la plus forte proportion de fumeurs (58%).</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Acquis personnels</h2>
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <h3>Compétences Techniques</h3>
+                    <p>Maîtrise des techniques de Data Mining (Clustering, ACP), manipulation de gros volumes de données sous RStudio et rédaction de rapports scientifiques sous LaTeX.</p>
+                </div>
+                <div class="skill-box" style="margin-bottom: 20px;">
+                    <h3>Esprit d'Analyse</h3>
+                    <p>Capacité à interpréter des résultats statistiques complexes pour en tirer des profils métiers concrets et exploitables en santé publique.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Détails des analyses graphiques</h2>
+            <div class="project-column-container">
+                
+                <div class="project-step">
+                    <h3>Analyse en Composantes Principales (ACP)</h3>
+                    <p>Le cercle des corrélations a permis de visualiser les liens entre les types de cultures et les axes. On y distingue clairement l'opposition entre les cultures céréalières et les cultures spécialisées comme la vigne.</p>
+                    <div class="img-wrapper">
+                        <img src="../images/PCA.png" alt="Cercle des corrélations ACP">
+                    </div>
+                </div>
+
+                <div class="project-step">
+                    <h3>Méthode du Coude (Inertie)</h3>
+                    <p>Ce graphique montre la décroissance de l'inertie. Le point d'inflexion (le "coude") entre 4 et 5 clusters justifie le choix de notre segmentation pour équilibrer précision et lisibilité.</p>
+                    <div class="img-wrapper">
+                        <img src="../images/SAE_4.02.png" alt="Graphique de l'inertie">
+                    </div>
+                </div>
+
+                <div class="project-step">
+                    <h3>Caractérisation des Clusters</h3>
+                    <p>Ce visuel présente les variables dominantes par groupe. Il met en évidence la spécialisation métier : certains groupes sont dédiés à la polyculture tandis que d'autres sont monothématiques (Vigne, Bovins).</p>
+                    <div class="img-wrapper">
+                        <img src="../images/caractere_cluster.png" alt="Profils des clusters">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>Technologies utilisées</h2>
+            <div style="margin-top: 10px;">
+                <span class="tech-pill">RStudio (ACP, k-means)</span>
+                <span class="tech-pill">Analyse Multivariée</span>
+                <span class="tech-pill">LaTeX (Reporting)</span>
+                <span class="tech-pill">Statistique Descriptive</span>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2026 Sacha Ucendo - Portfolio. Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>

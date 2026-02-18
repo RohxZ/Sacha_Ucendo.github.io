@@ -1,0 +1,752 @@
+/* =========================================
+   1. RESET & BASE
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    scroll-behavior: smooth;
+    background-color: #f4f7f6;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   2. HEADER & NAVIGATION (Bandeau Fixe)
+   ========================================= */
+.main-header {
+    background: #333;
+    color: white;
+    padding: 0.8rem 5%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+}
+
+.linkedin-link img {
+    height: 35px;
+    width: auto;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.linkedin-link img:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #667eea;
+}
+
+/* =========================================
+   3. SECTION HÉRO (Accueil)
+   ========================================= */
+.hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    padding: 80px 8% 40px 8%;
+}
+
+.hero-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.hero-text h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-image img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 12px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 15px 35px;
+    background: white;
+    color: #667eea;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* --- ANIMATIONS --- */
+.fade-in-up {
+    opacity: 0;
+    animation: fadeInUp 1.5s ease-out forwards;
+}
+
+.fade-in-right {
+    opacity: 0;
+    animation: fadeInRight 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* =========================================
+   4. SECTIONS COMMUNES & PROJETS
+   ========================================= */
+section:not(.hero) {
+    padding: 35px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+section h2::after {
+    content: '';
+    width: 60px;
+    height: 4px;
+    background: #667eea;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #eee;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    border-color: #667eea;
+}
+
+/* =========================================
+   5. PAGE CONTACT (CORRIGÉ)
+   ========================================= */
+.contact-section {
+    background-color: #f4f7f6;
+    padding: 100px 5% 60px 5% !important;
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    max-width: 1000px;
+    margin: 20px auto 0 auto;
+    align-items: start;
+}
+
+.contact-info h3 {
+    font-size: 1.8rem;
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+.contact-item {
+    background: white;
+    /* On enlève le padding ici pour le mettre sur le lien */
+    padding: 0; 
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border-left: 5px solid #667eea;
+    transition: transform 0.3s ease;
+    overflow: hidden; /* Pour que le clic respecte les arrondis des coins */
+}
+
+.contact-item:hover { 
+    transform: translateX(10px); 
+}
+
+/* On force le lien à remplir tout l'espace du bloc */
+.contact-item a {
+    display: block;   /* Remplit toute la largeur */
+    padding: 25px;    /* On remet le padding ici pour garder le style */
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    width: 100%;
+}
+
+/* Cas particulier pour la localisation qui n'est pas un lien */
+.contact-item p, .contact-item > strong {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.contact-item > strong { padding-top: 25px; }
+.contact-item p { padding-bottom: 25px; }
+
+.contact-item strong {
+    display: block;
+    font-size: 0.9rem;
+    color: #764ba2;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+/* Style du Formulaire amélioré */
+.contact-form {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 25px; /* Plus d'espace entre les champs */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #444;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 15px; /* Champs plus hauts et confortables */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.form-group textarea {
+    height: 180px; /* Zone de message plus grande */
+    resize: none;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
+}
+
+/* =========================================
+   6. PAGES DÉTAILS PROJET
+   ========================================= */
+.project-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 140px 8% 50px 8%;
+    text-align: center;
+}
+
+.project-page-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 5%;
+}
+
+.project-page-container ul {
+    list-style-position: outside; /* Force la puce à rester à l'extérieur du bloc de texte */
+    margin-left: 25px;            /* Crée l'espace nécessaire pour la puce à gauche */
+    padding-left: 0;
+}
+
+.project-page-container li {
+    margin-bottom: 10px;          /* Espace entre chaque point de la liste */
+    margin-top: 10px;       /* Espace au-dessus de chaque point de la liste */
+    text-align: left;             /* Assure que le texte est bien aligné à gauche */
+}
+
+.project-page-container h2 {
+    color: #667eea;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.project-page-container h2::after { left: 0; transform: none; }
+
+.skill-box {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    border-left: 5px solid #764ba2;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.tech-pill {
+    display: inline-block;
+    background: #eef2ff;
+    color: #667eea;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-weight: bold;
+    margin: 5px 10px 5px 0;
+    border: 1px solid #667eea;
+}
+
+/* =========================================
+   7. FOOTER & RESPONSIVE
+   ========================================= */
+footer {
+    background: #919090;
+    color: white;
+    text-align: center;
+    padding: 40px;
+}
+
+@media (max-width: 992px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    .hero-container { flex-direction: column-reverse; text-align: center; }
+    .hero-image img { width: 280px; height: 280px; }
+    .nav-links { display: none; }
+}
+/* =========================================
+   8. GRILLE COMPÉTENCES (INDEX UNIQUEMENT)
+   ========================================= */
+
+.skills-grid-main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+.skills-grid-main .skill-box {
+    margin-bottom: 0; 
+    width: 100%;
+    text-align: left;
+    /* Transition fluide pour l'effet de survol */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Curseur par défaut (flèche de navigation) au lieu de la main */
+    cursor: default; 
+}
+
+.skills-grid-main .skill-box:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    border-left-color: #667eea;
+    background-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .skills-grid-main {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================
+   9. BOUTON TÉLÉCHARGER CV (SECTION À PROPOS)
+   ========================================= */
+
+.about {
+    text-align: center; /* Centre le texte et le bouton */
+}
+
+.about .btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Reprend le dégradé du portfolio */
+    color: white; /* Texte en blanc pour contraster avec le fond gris clair */
+    padding: 12px 30px;
+    border: none;
+    display: inline-block;
+}
+
+.about .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* =========================================
+   9. BANDE DÉFILANTE LOGOS (CORRECTIF ALIGNEMENT)
+   ========================================= */
+
+.logos-slider {
+    width: 100%;
+    overflow: hidden;
+    padding: 40px 0;
+    background: white;
+    position: relative;
+}
+
+.logos-track {
+    display: flex;
+    width: max-content; /* Force la ligne à s'étendre selon le nombre de logos */
+    animation: scroll 20s linear infinite;
+}
+
+.logo-item {
+    padding: 0 40px; /* Espace entre les logos */
+}
+
+.logo-item img {
+    height: 70px;
+    width: auto;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.logo-item img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* L'animation défile de 50% car le contenu est doublé en JS */
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Arrête l'animation au survol du slider */
+.logos-slider:hover .logos-track {
+    animation-play-state: paused;
+}
+
+/* Style de la zone de description en dessous */
+.logiciel-description {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    border-left: 5px solid #667eea;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 500;
+    color: #444;
+    transition: all 0.3s ease;
+}
+
+/* Pour que les logos soient interactifs même après clonage */
+.logo-item {
+    cursor: default;
+}
+
+/* =========================================
+   10. SECTION EXPÉRIENCES PROFESSIONNELLES
+   ========================================= */
+.experience-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.experience-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border-left: 6px solid #667eea; /* Rappel de ta couleur principale */
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.experience-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-left-color: #764ba2; /* Change de couleur au survol */
+}
+
+.exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.exp-role h3 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.exp-company {
+    color: #667eea;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.exp-date {
+    background: #f4f7f6;
+    padding: 6px 15px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    color: #764ba2;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.exp-body p {
+    margin-bottom: 15px;
+    color: #555;
+    font-style: italic;
+}
+
+.exp-body ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.exp-body li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+/* Ajout d'une petite puce stylisée avant chaque liste */
+.exp-body li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
+}
+
+/* Mobile : on empile la date sous le titre */
+@media (max-width: 768px) {
+    .exp-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* =========================================
+    11. GALERIE PROJET & MODAL ZOOM
+   ========================================= */
+
+.project-column-container {
+    max-width: 900px; 
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 80px; 
+}
+
+.project-step {
+    text-align: center; 
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.project-step h3 {
+    font-size: 1.8rem;
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+.project-step p {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 700px;
+    margin: 0 auto 25px auto; 
+    line-height: 1.6;
+}
+
+.img-wrapper {
+    width: 100%;
+    background: #fafafa;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #eee;
+}
+
+.img-wrapper img {
+    max-width: 100%;    
+    height: auto;       
+    max-height: 500px;  
+    display: block;
+    margin: 0 auto;     
+    object-fit: contain;
+    /* --- AJOUTS POUR LE ZOOM --- */
+    cursor: zoom-in;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.img-wrapper img:hover {
+    opacity: 0.9;
+}
+
+/* --- STYLES DE LA FENÊTRE MODALE (LIGHTBOX) --- */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 9999; 
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 10px;
+    animation: zoomAnimation 0.3s ease-out;
+    cursor: default;
+}
+
+@keyframes zoomAnimation {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px; right: 35px;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+/* =========================================
+   12. AJOUT ILLUSTRATIONS CARTES PROJETS (ADAPTÉ)
+   ========================================= */
+
+.project-card {
+    padding: 0; 
+    overflow: hidden; 
+}
+
+.project-image {
+    width: 120%;
+    height: 200px; 
+    overflow: hidden;
+    /* On met un fond blanc ou gris très clair pour remplir les bords */
+    background-color: #ffffff; 
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-image img {
+    /* Largeur et hauteur max pour que l'image ne déborde jamais */
+    max-width: 100%;
+    max-height: 100%;
+    /* ESSENTIEL : affiche toute l'image sans la couper */
+    object-fit: contain; 
+    transition: transform 1.5s ease;
+    padding: 10px; /* Petit espace pour que le graphique ne colle pas aux bords */
+}
+
+/* L'effet de zoom reste propre même en mode contain */
+.project-card:hover .project-image img {
+    transform: scale(1.20);
+}
+
+.project-content {
+    padding: 25px;
+}

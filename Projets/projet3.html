@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Séries Temporelles - Sacha Ucendo</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // 1. Création dynamique de la structure de la modale
+    const modalHtml = `
+        <div id="imgModal" class="modal" style="display:none;">
+            <span class="close-modal">&times;</span>
+            <img class="modal-content" id="fullImg">
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+    const modal = document.getElementById("imgModal");
+    const modalImg = document.getElementById("fullImg");
+    const closeBtn = document.querySelector(".close-modal");
+
+    // 2. Gestion du clic sur les images de tes wrappers
+    document.querySelectorAll('.img-wrapper img').forEach(img => {
+        img.addEventListener('click', function() {
+            modal.style.display = "flex";
+            modalImg.src = this.src;
+            document.body.style.overflow = "hidden"; // Empêche le scroll en arrière-plan
+        });
+    });
+
+    // 3. Fonctions de fermeture
+    const closeModal = () => {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+    };
+
+    closeBtn.onclick = closeModal;
+    modal.onclick = (e) => { if(e.target === modal) closeModal(); }; // Ferme si on clique à côté
+
+    // Fermeture avec la touche Echap
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape" && modal.style.display === "flex") closeModal();
+    });
+    });
+</script>
+
+<body>
+
+    <header class="main-header">
+        <nav>
+            <div class="logo-area">
+                <a href="URL_DE_TON_LINKEDIN" target="_blank" class="linkedin-link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html#home">Accueil</a>
+                <a href="../index.html#about">À propos</a>
+                <a href="../index.html#competences">Compétences</a>
+                <a href="../index.html#logiciels">Outils</a>
+                <a href="../index.html#projects">Projets</a>
+                <a href="../index.html#experience">Expériences</a>
+                <a href="../contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <header class="project-header">
+        <div class="fade-in-up">
+            <h1>SAÉ 3.03 : Analyse de séries temporelles</h1>
+            <p>Étude et prévision des cotations de matières premières (2010-2024)</p>
+        </div>
+    </header>
+    
+    <div class="project-page-container">
+        <section class="section">
+            <h2>À propos</h2>
+            <p>Ce projet, réalisé au sein du BUT Science des Données, consistait à étudier l’évolution des cotations de plusieurs matières premières (café, cacao, jus d’orange, sucre, pétrole Brent). L’enjeu majeur était de transformer des données brutes issues de fichiers PDF en modèles statistiques prédictifs exploitables.</p>
+        </section>
+
+        <section class="section">
+            <h2>Organisation du travail</h2>
+            <p>Le projet a été mené en groupe de quatre personnes, avec un suivi hebdomadaire rigoureux. Nous avons utilisé des outils de pointe pour l'extraction de données (<strong>tabulapdf</strong>) et la manipulation statistique (<strong>tidyverse</strong>). Ce travail a été complété par une évaluation théorique individuelle sur la modélisation chronologique.</p>
+        </section>
+
+        <section class="section">
+            <h2>Démarche et résolution</h2>
+            <p>La résolution de ce problème complexe s'est articulée autour de quatre piliers :</p>
+            <ul>
+                <li><strong>Extraction & Structuration :</strong> Utilisation de <code>tabulapdf</code> pour récupérer les données historiques depuis Investing.com et création d'une base de données propre avec 5 variables clés.</li>
+                <li><strong>Analyse Exploratoire :</strong> Réalisation de visualisations avancées (boxplots annuels, moyennes mensuelles) pour détecter les tendances de fond.</li>
+                <li><strong>Modélisation :</strong> Analyse des relations entre séries (ex: cacao vs café) et mise en place d'une <strong>régression linéaire par morceaux</strong> pour le pétrole Brent.</li>
+                <li><strong>Prévision :</strong> Génération de prévisions sur 26 mois incluant les intervalles de confiance pour anticiper les fluctuations du marché.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Acquis personnels</h2>
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <h3>Expertise Technique</h3>
+                    <p>Maîtrise de la bibliothèque <code>ggplot2</code> pour les séries chronologiques, manipulation de formats complexes (PDF vers R) et modélisation statistique avancée (R², p-value).</p>
+                </div>
+                <div class="skill-box" style="margin-bottom: 20px;">
+                    <h3>Analyse de Marché</h3>
+                    <p>Capacité à identifier des ruptures de tendance et des composantes saisonnières dans des environnements économiques volatils.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Détails des analyses graphiques</h2>
+            <div class="project-column-container">
+                
+                <div class="project-step">
+                    <h3>Variabilité annuelle (Boxplots)</h3>
+                    <p>Ce graphique permet d'observer la dispersion des prix par année. On note une explosion des cours du cacao et du jus d'orange en 2024, liée à l'augmentation du coût des intrants (pesticides, engrais).</p>
+                    <div class="img-wrapper">
+                        <img src="../images/cotation général.png" alt="Boxplots des matières premières">
+                    </div>
+                </div>
+
+                <div class="project-step">
+                    <h3>Diagramme des saisonnalités</h3>
+                    <p>L'analyse mensuelle du pétrole Brent montre l'absence d'une composante saisonnière marquée, indiquant que les prix sont davantage régis par des facteurs géopolitiques que par des cycles calendaires.</p>
+                    <div class="img-wrapper">
+                        <img src="../images/cotation petrole.png" alt="Saisonnalité du pétrole">
+                    </div>
+                </div>
+
+                <div class="project-step">
+                    <h3>Modélisation et Prévision</h3>
+                    <p>La régression par morceaux appliquée au Brent permet de modéliser les changements de régime économique. Le graphique inclut une prévision sur </p>
+                    <div class="img-wrapper">
+                        <img src="../images/prediction.png" alt="Prévision pétrole Brent">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>Technologies utilisées</h2>
+            <div style="margin-top: 10px;">
+                <span class="tech-pill">R (tidyverse, tabulapdf)</span>
+                <span class="tech-pill">Modélisation Temporelle</span>
+                <span class="tech-pill">ggplot2</span>
+                <span class="tech-pill">Prévision Statistique</span>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2026 Sacha Ucendo - Portfolio. Tous droits réservés.</p>
+    </footer>
+
+</body>
+</html>
